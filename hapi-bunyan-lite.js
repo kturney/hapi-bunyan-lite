@@ -29,8 +29,8 @@ exports.register = function (plugin, options, next) {
         data: event.data
       };
 
-      if (options.preProcessData) {
-        options.preProcessData(objLog, event, tags, request);
+      if (options.preProcessData && false === options.preProcessData(objLog, event, tags, request)) {
+        return;
       }
 
       var level = findLogLevelFromTags(tags, opts.defaultLogLevel);
